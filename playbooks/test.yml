@@ -1,0 +1,12 @@
+---
+- name: Test playbook for sudo ssh
+  hosts: all
+  connection: sudo_ssh
+  tasks:
+    - name: test ssh to localhost
+      command: whoami
+      register: whoami
+
+    - name: print var
+      debug:
+        msg: "{{ whoami }}"
