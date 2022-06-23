@@ -1304,8 +1304,9 @@ class Connection(ConnectionBase):
             args = ('-tt', self.host, cmd)
         else:
             args = (self.host, cmd)
-
+        sudo_cmd = 'sudo'.encode()
         cmd = self._build_command(ssh_executable, 'ssh', *args)
+        cmd.insert(0,sudo_cmd)
         (returncode, stdout, stderr) = self._run(cmd, in_data, sudoable=sudoable)
 
         # When running on Windows, stderr may contain CLIXML encoded output
